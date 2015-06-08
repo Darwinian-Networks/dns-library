@@ -37,7 +37,8 @@ Student Numbers:\\
 
 % Abstract
 \begin{abstract}
-We propose a programming library for Darwinian networks (DNs), a network for simplify working with Bayesian networks (BNs).
+\emph{Darwinian networks} (DNs) is a simplification of working with \emph{Bayesian networks} (BNs).
+We propose a programming library for Darwinian networks (DNs).
 The library covers adaptation and evolution in DNs, for modelling a problem domain and inference on the model, respectively.
 The implementation uses C++, expanding over a well established BN library called aGrUM.
 Furthermore, a wrapper in Python is created over the C++ library, in order to facilitate the development of DN systems with a scripting language.
@@ -49,51 +50,51 @@ Furthermore, a wrapper in Python is created over the C++ library, in order to fa
 %add paragraph of motivation
 
 %too many "respectively". To change
-Darwinian networks (DNs) \cite{butzOliveiraSantosCai15} was proposed as a simplification of working with Bayesian networks \cite{pear88} (BNs).
-A BN is a set of conditional probability tables (CPTs) and a direct acyclic graph (DAG).
-The DAG is used to representing graphically the CPTs.
+Darwinian networks (DNs) \cite{butzOliveiraSantosCai15} were proposed as a simplification of working with Bayesian networks (BNs).
+A BN is a set of \emph{conditional probability tables} (CPTs) and a \emph{direct acyclic graph} (DAG) \cite{pear88}.
+The DAG is used to represent graphically the relations between vertices and each vertex is associate with a CPT that quantifies those reslations.
 On the other hand, a DN directly draws the CPTs as a dashed circle called population.
 A population has white and black nodes, called combative and docile traits, respectively.
-The combative and docile traits are used to represent variables on the LHS and RHS of a CPT, respectively.
+Combative traits are used to represent variables on the LHS of a CPT and docile traits represent the variables of the RHS of a CPT.
 Therefore, a DN is defined as a multi-set of populations.
-Modeling in BNs involves testing independencies in a DAG using a graphical test called d-separation \cite{pear88}.
-Similarly, in DNs, testing independencies can be graphically performed with a test called adaptation \cite{butzOliveiraSantosCai15}.
+
+Modeling in BNs involves testing independencies in a DAG using a graphical test called \emph{d-separation} \cite{pear88}.
+Testing independencies in DNs can be graphically performed with a test called \emph{adaptation} \cite{butzOliveiraSantosCai15}.
 Inference in BN is done by systematically manipulating the CPTs with multiplications and divisions and marginalization.
-Respectively, a DN graphically represents these operations with the merge and replication followed by natural selection of populations.
+DNs graphically represents multiplications and divisions with the merge of populations and marginalization with replication of populations followed by natural selection.
+DNs perform both modeling and inference in the same platform.
 
 A programming library is essential to run experimental results, develop real world systems, incentive the literature in the area, among other applications.
-%Add reference
-In this paper, we propose the implementation of a DN library, which contains the basic tools for modelling a DN, testing adaptation and performing evolution in DNs.
-A user of the library could develop using the library following the general ideas from published papers in DNs \cite{butzOliveiraSantosCai15} as explained next.
-%this gooes conclusion
-For modelling DNs, the library makes available procedures for defining populations with combative and docile traits.
-For testing independencies between two sets of populations ${\cal P}_X$ and ${\cal P}_Z$ given ${\cal P}_Y$, denoted $A({\cal P}_X, {\cal P}_Y, {\cal P}_Z)$, it is necessary to define an initial and final DNs.
-Then, the process of natural selection removes barren populations, which are irrelevant for the test.
-A procedure for docilization act on a given DN by adding docile populations, populations with only docile traits, for each population with more than one docile trait.
-Then, the deletion procedure removes all populations in ${\cal P}_Y$.
+In this paper, we propose the implementation of a DN library, which contains the basic tools for modeling, testing adaptation and performing evolution in DNs.
+A user of the library can work with DNs following general ideas from published papers in DNs \cite{butzOliveiraSantosCai15} and discover new practical understanding of BNs, all applied with simple procedures that act with the same remarkable robust view of DNs.
+
+For modeling DNs, the library makes available procedures for all steps of adaptation, first defining populations with combative and docile traits.
+Then, to test adaptation between two sets of populations ${\cal P}_X$ and ${\cal P}_Z$ given a third set of populations ${\cal P}_Y$, namely $A({\cal P}_X, {\cal P}_Y, {\cal P}_Z)$, it is simply necessary to define an initial and a final DN.
+Moreover, the process of natural selection removes barren populations and the procedure for docilization acts on the resulting DN adding docile populations (populations containing only docile traits) for each population with more than one docile trait.
+Deletion procedure then removes all populations in ${\cal P}_Y$.
 Finally, a procedure for recursive merging is called in order to check if traits from ${\cal P}_X$ and ${\cal P}_Z$ end up together in a same population.
-%new para??
+
 For inference, three basic procedures are available, namely, merge, replication and natural selection.
 First, an initial and final DNs are determined.
 The merge of two populations combines them into a new population with all combative traits and some of the docile traits.
 When two combative traits for the same variable occurs that means a division.
-%add connection between two setences
 The library is capable to detect all the possible combination of traits and perform the respective operation.
 Replication of a population is a procedure which makes a copy of that population in the current DN as well as generated any other population with all the docile from the original one but a subset of the combative traits.
 Then, natural selection can be called eventually in order to remove unnecessary populations for that evolution up to when the call occurs.
 
 The implementation of the DN library is in C++ programming language.
-% add reference to Agrum
-A well established BN library, called aGrUM, is used as base for the DN library, meaning that all the basic data structure, like CPTs, potentials, variables, multiplication, addition, and  division, among others, is used from aGrUM.
-Besides taking advantage of the fast implementation of aGrUM, another advantage of using it is to provide a platform for fair comparison between BNs and DNs, since both are in the same programming language and the same set of basic implementation.
-aGrUm has a wrapper for Python by using another library called SWIG interface generator.
+A well established open source C++ framework for BN, called \emph{aGrUM}\footnote{http://agrum.lip6.fr}, is used as base for the DN library, meaning that all the basic data structure, like CPTs, potentials, variables, multiplication, addition, and division, among others, is used from aGrUM.
+Besides of the fast implementation of aGrUM, another advantage of using this framework is to provide a platform for fair comparison between BNs and DNs, since both are in the same programming language and the same set of basic implementation.
+One salient feature of aGrUm it is a wrapper for Python which uses another library called \emph{Simplified Wrapper and Interface Generator}\footnote{http://www.swig.org/} (SWIG).
 The DN library will also use SWIG in order to provide a Python programming interface for the users.
 
-In summary, this papers propose the implementation of a DN library.
+In summary, this paper proposes the implementation of a DN library.
 All the basic operations for adaptation and evolution in DNs will be available through the library.
-The implementation itself uses C++ programming language and the basic data structures are provided by another library called aGrUM.
+The implementation itself uses C++ programming language and the basic data structures are provided by aGrUM library.
 A Python interface will be also available for rapid prototyping systems and teaching.
+The main advantage of the DN library is to apply novel ideas and techniques of DNs that were recently propose to simplify working with BNs.
 
+\newpage
 % References
 \bibliographystyle{splncs03}
 \bibliography{references/references}
