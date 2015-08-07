@@ -20,7 +20,7 @@ DNs graphically represents multiplications and divisions with the merge of popul
 DNs perform both modeling and inference in the same platform.
 
 A programming library is essential to run experimental results, develop real world systems, incentive the literature in the area, among other applications.
-In this paper, we propose the implementation of a DN library, which contains the basic tools for modeling, testing adaptation and performing evolution in DNs.
+In this project, we propose the implementation of a DN library, which contains the basic tools for modeling, testing adaptation and performing evolution in DNs.
 A user of the library can work with DNs following general ideas from published papers in DNs \cite{butzOliveiraSantosCai15} and discover new practical understanding of BNs, all applied with simple procedures that act with the same remarkable robust view of DNs.
 
 For modeling DNs, the library makes available procedures for all steps of adaptation, first defining populations with combative and docile traits.
@@ -37,15 +37,17 @@ The library is capable to detect all the possible combination of traits and perf
 Replication of a population is a procedure which makes a copy of that population in the current DN as well as generated any other population with all the docile from the original one but a subset of the combative traits.
 Then, natural selection can be called eventually in order to remove unnecessary populations for that evolution up to when the call occurs.
 
-The implementation of the DN library is in C++ programming language.
-A well established open source C++ framework for BN, called \emph{aGrUM}\footnote{http://agrum.lip6.fr}, is used as base for the DN library, meaning that all the basic data structure, like CPTs, potentials, variables, multiplication, addition, and division, among others, is used from aGrUM.
-Besides of the fast implementation of aGrUM, another advantage of using this framework is to provide a platform for fair comparison between BNs and DNs, since both are in the same programming language and the same set of basic implementation.
-One salient feature of aGrUm it is a wrapper for Python which uses another library called \emph{Simplified Wrapper and Interface Generator}\footnote{http://www.swig.org/} (SWIG).
-The DN library will also use SWIG in order to provide a Python programming interface for the users.
+The implementation of the DN library utilizes Python programming language, known for its code readability and simple syntax.
+As a base for DN library, we develop a reliable framework for probabilistic graphical models, called \emph{Darwin Library}, that is, all the basic data structure such as CPTs, potentials, variables, multiplication, addition, and division are used from Darwin Library.
+Besides of the reliable implementation of Darwin Library, another advantage of using this framework is to provide a platform for fair comparison between BNs and DNs, since both are in the same programming language and the same set of basic implementation.
+One salient feature of Darwin library it is test unity for all its operation classes.
+A test unity is a software testing method which uses individual units of source code that are tested to determine whether they are fit for use \cite{kolawa2007automated}.
+The DN library will also use \emph{IPython Notebook} \cite{PER-GRA:2007} in order to provide a Python programming interface for the users.
 
-In summary, this paper proposes the implementation of a DN library.
+%to finish
+In summary, this project proposes the implementation of a DN library.
 All the basic operations for adaptation and evolution in DNs will be available through the library.
-The implementation itself uses C++ programming language and the basic data structures are provided by aGrUM library.
+The implementation itself uses Python programming language and the basic data structures are provided by aGrUM library.
 A Python interface will be also available for rapid prototyping systems and teaching.
 The main advantage of the DN library is to apply novel ideas and techniques of DNs that were recently propose to simplify working with BNs.
 
