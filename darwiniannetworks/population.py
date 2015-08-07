@@ -1,6 +1,8 @@
 from darwin.potential import (
     Potential,
-    multiply
+    multiply,
+    divide,
+    marginalize
     )
 
 
@@ -23,6 +25,16 @@ class Population(Potential):
         super().__init__(variables, cardinalities, values,
                          combative, docile, evidence)
 
+    @staticmethod
+    def from_potential(potential):
+        return Population(potential.variables,
+                          potential.cardinalities,
+                          potential.values,
+                          potential.left_hand_side,
+                          potential.right_hand_side,
+                          potential.evidence
+                          )
+
     def combative(self):
         return self.left_hand_side
 
@@ -30,4 +42,14 @@ class Population(Potential):
         return self.right_hand_side
 
     def merge(self, other_population):
-        return multiply(self, other_population)
+        if len(
+            set(self.combative).intersection(set(other_population.combative))
+           ) > 0:
+            potential = divide(self, other_population)
+        else:
+            potential = multiply(self, other_population)
+        return Population.from_potential(potential)
+
+    def replicate(self, variables):
+        potential = marginalize(self, variables)
+        return Population.from_potential(potential)
