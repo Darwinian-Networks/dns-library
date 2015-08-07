@@ -1,3 +1,4 @@
 build
 darwiniannetworks/__pycache__
 doc/full_manual/.texpadtmp
+*.pdf
