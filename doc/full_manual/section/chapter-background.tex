@@ -1,9 +1,8 @@
-% !TEX root = ../thesis-example.tex
-%
 \chapter{Background}
 \label{sec:background}
 
-We review both modeling and inference in BNs and in DNs.
+\reversemarginpar
+We review modeling and inference in BNs and in DNs.
 
 \section{Bayesian Networks}
 \label{sec:baysian_networks}
@@ -12,16 +11,13 @@ Let $U = \{ v_1, v_2, \ldots , v_n \}$ be a finite set of variables, each with a
 A singleton set $\{v\}$ may be written as $v$, $\{ v_1, v_2, \ldots, v_n \}$ as $v_1 v_2 \cdots v_n$, and $X \cup Y$ as $XY$.
 For disjoint $X,Y \subseteq U$, a \emph{conditional probability table} (CPT) $P(X|Y)$ is a potential over $XY$ that sums to one for each value $y$ of $Y$.
 
-A \emph{Bayesian network} (BN) \cite{pear88} is a \emph{directed acyclic graph} (DAG) $\cal{B}$ on $U$ together with CPTs $P(v_1 | Pa(v_1))$, $P(v_2|Pa(v_2)),$$\ldots,$ $P(v_n|Pa(v_n))$, where the \emph{parents} $Pa(v_i)$ of $v_i$ are those $v_j$ such that $(v_j,v_i) \in \cal{B}$.
+A \emph{Bayesian network}\marginnote{\tiny BAYESIAN NETWORK} (BN) \cite{pear88} is a \emph{directed acyclic graph} (DAG) $\cal{B}$ on $U$ together with CPTs $P(v_1 | Pa(v_1))$, $P(v_2|Pa(v_2)),$$\ldots,$ $P(v_n|Pa(v_n))$, where the \emph{parents} $Pa(v_i)$ of $v_i$ are those $v_j$ such that $(v_j,v_i) \in \cal{B}$.
 We call $\cal{B}$ a BN, if no confusion arises.
-The \emph{d-separation method} \cite{pear88} can be used to read independencies from a DAG. 
-%For example, Figure \ref{fig:dag} (i) shows a BN, where CPTs $P(a)$, $P(b|a), \ldots,$ $P(f|b,e)$ are not illustrated and, for instance, I(d, b, e), I(c,∅, f), I(h, g, i) and I(def h, b, g) all hold by d-separation in the DAGD in Fig. 1. 
-
-[example d-separation]
+The \emph{d-separation method}\marginnote{\tiny D-SEPARATION} \cite{pear88} can be used to read independencies from a DAG.
 
 %todo image BN
 
-One method to perform inference on a DAG is called \emph{Variable elimination} (VE) \cite{zhan94}, which computes $P(X|Y=y)$ from a BN $\cal{B}$ as follows:
+One method to perform inference on a DAG is called \emph{Variable elimination}\marginnote{\tiny VARIABLE ELIMINATION} (VE) \cite{zhan94}, which computes $P(X|Y=y)$ from a BN $\cal{B}$ as follows:
 (i) all barren variables are removed recursively, where $v$ is \emph{barren} \cite{zhan94}, if $Ch(v) = \emptyset$ and $v \not\in XY$;
 (ii) all independent by evidence variables are removed, giving ${\cal{B}}^s$, where $v$ is an \emph{independent by evidence} variable, if $I(v,Y,X)$ holds in $\cal{B}$ by m-separation;
 (iii) build a uniform distribution $1(v)$ for any root of ${\cal{B}}^s$ that is not a root of $\cal{B}$;
@@ -30,33 +26,25 @@ One method to perform inference on a DAG is called \emph{Variable elimination} (
 (vi) following $\sigma$, eliminate variable $v$ by multiplying together all potentials involving $v$, and then summing $v$ out of the product;
 and, (vii) multiply together all remaining potentials and normalize to obtain $P(X|Y=y)$.
 
-%todo example
 
-[example VE]
-
-To perform probabilistic inference, a BN is commonly transformed into a \emph{Markov network} (MN) \cite{pear88}, also called a \emph{decomposable} MN. 
+To perform probabilistic inference, a BN is commonly transformed into a \emph{Markov network} \marginnote{\tiny MARKOV NETWORK}(MN) \cite{pear88}, also called a \emph{decomposable} MN. 
 A MN consists of a triangulated (chordal) graph together with a potential defined over each maximal clique of triangulated graph. 
 Given a DAG ${\cal D}$, the \emph{moralization} \cite{laur88} of ${\cal D}$ is the undirected graph constructed by adding an undirected edge between each pair of parents of a common child and then dropping directionality.
 When necessary, edges are added to the moralized graph to obtain a triangulated graph. 
 The maximal cliques are organized as join tree $\cal T$. 
 Finally, the CPTs of the BN are assigned to nodes of $\cal T$. 
 
-[example MN]
-%Example 2. Consider the BND = (D, C) above. The moralizationDm ofD is shown in Fig. 2. A minimum triangulationDt can be obtained by adding the two edges (b, f) and (f, g) toDm. The maximal cliques of the triangulated graph Dt are bdef, bf g, f gh, cf h, ac, hk, and ghij. These cliques are organized as a jointree J, as shown in Fig. 3. 
 
 \clearpage
 
 \section{Darwinian Networks}
 \label{sec:darwinian_networks}
 
-\emph{Darwinian networks} (DNs) \cite{butzOliveiraSantosCai15} were proposed to simplify working with \emph{Bayesian networks} (BNs) \cite{pear88}.
+\emph{Darwinian networks} (DNs)\marginnote{\tiny DARWINIAN NETWORKS} \cite{butzOliveiraSantosCai15} were proposed to simplify working with \emph{Bayesian networks} (BNs) \cite{pear88}.
 Rather than modelling the variables in a problem domain, DNs represent the probability tables in the model.
 The graphical manipulation of the tables then takes on a biological feel, where a CPT $P(X|Y)$ is viewed as the novel representation of a \emph{population} $p(C,D)$ using both \emph{combative} traits $C$ (coloured clear) and \emph{docile} traits $D$ (coloured dark).
 
 %todo example BN --> DN
-%CAPTION: For example, Figure \ref{fig_DN_independent_variables_first} (i) shows eight populations, including $p(b,ag)$, short for $p(\{b\},\{a,g\})$, illustrated with a closed curve around the (clear) combative trait $b$ and two (dark) docile traits $a$ and $g$.
-
-
 
 Adaptation and evolution are used to represent the testing of independencies and inference, respectively.
 Thus, DNs can represent exact inference VE, as well the test of independencies d-separation.
@@ -68,54 +56,55 @@ The query $P(X|Y)$ posed to a BN ${\cal B}$ is represented by DN ${\cal D}^{\pri
 \subsection{Definitions}
 \label{subsec:definitions}
 
-		TRAITS
-		
-		A \emph{trait} $t$ can be combative or docile.
+
+%TRAIT
+
+		A \emph{trait}\marginnote{\tiny TRAIT} $t$ can be combative or docile.
 		A \emph{combative} trait $t_c$ is depicted by a clear (white) circle.
 		A \emph{docile} trait $t_d$ is illustrated by a dark (black) circle.
 
-		POPULATION
-		
-		A \emph{population} $p(C,D)$ contains a non-empty set $CD$ of traits, where $C$ and $D$ are disjoint, $C$ is exclusively combative, and $D$ is exclusively docile.
+%POPULATION
+
+		A \emph{population}\marginnote{\tiny POPULATION}  $p(C,D)$ contains a non-empty set $CD$ of traits, where $C$ and $D$ are disjoint, $C$ is exclusively combative, and $D$ is exclusively docile.
 		A population is depicted by a closed curve around its traits.
 
+%DN
 
-		DN
-		
-		A \emph{Darwinian network} (DN), denoted $\cal{D}$, is a finite, multiset of populations.
+		A \emph{Darwinian network} (DN)\marginnote{\tiny DN} , denoted $\cal{D}$, is a finite, multiset of populations.
 		A DN $\cal{D}$ is depicted by a dashed closed curve around its populations.
 		All combative traits in a given DN $\cal{D}$ are defined as $T_c(\cal{D})$ $=$ $\{t_{c} ~ | ~ t_{c} \in C,$ for at least one $p(C,D) \in \cal{D}\}$.
 		All docile traits in $\cal{D}$, denoted $T_d(\cal{D})$, are defined similarly
 
-\subsection{Representing Operations}
-\label{subsec:representing_operations}
+
+\subsection{Operations}
+\label{subsec:operations}
 
 
 
-		DOCILIZATION
+%		DOCILIZATION
 		
-		\emph{Docilization} of a DN $\cal{D}$ adds $p(\emptyset,D)$ to $\cal D$, for every population $p(C,D)$ in ${\cal D}$ with $|D| > 1$.
-%		For example, the docilization of Figure  \ref{fig_DN_independent_variables_first} (ii) is itself, while the docilization of Figure  \ref{fig_DN_independent_variables_second} (ii) adds populations $p(\emptyset,ag)$ and $p(\emptyset,be)$, giving Figure  \ref{fig_DN_independent_variables_second} (iii).
-
-		DELETION
+		\emph{Docilization}\marginnote{\tiny DOCILIZATION} of a DN $\cal{D}$ adds $p(\emptyset,D)$ to $\cal D$, for every population $p(C,D)$ in ${\cal D}$ with $|D| > 1$.
 		
-		To \emph{delete} a population $p(C,D)$ from a DN $\cal{D}$ is to remove all occurrences of it from $\cal{D}$.
-%		For example, the deletion of $p(c,a)$ from Figure \ref{fig_DN_independent_variables_first} (ii) gives Figure \ref{fig_DN_independent_variables_first} (iii).
 
-		MERGE
+%		DELETION
 		
-		Two populations \emph{merge} together as follows: for each trait $t$ appearing in either population, if $t$ is combative in exactly one of the two populations, then $t$ is combative in the merged population; otherwise, $t$ is docile.
-%		For example, the merge of populations $p(e,c)$ and $p(f,e)$ in Figure \ref{fig_DN_independent_variables_first} (iii) is population $p(ef,c)$ in Figure \ref{fig_DN_independent_variables_first} (iv).
-
-		NATURAL SELECTION
+		To \emph{delete}\marginnote{\tiny DELETION} a population $p(C,D)$ from a DN $\cal{D}$ is to remove all occurrences of it from $\cal{D}$.
 		
-		In adaptation, \emph{natural selection} removes recursively all barren populations from a DN $\cal{D}$ with respect to another DN ${\cal{D}}^{'}$.
 
-		REPLICATION
+%		MERGE
 		
-		\emph{Replication} of a population $p(C,D)$ gives $p(C,D)$, as well as any set of populations $p(C^{'}, D)$, where $C^{'} \subset C$.
-%		For instance, replication of $p(ce, dh)$ in Figure \ref{fig_one_DN} (v) can yield $p(ce, dh)$ and $p(e,dh)$ in Figure \ref{fig_one_DN} (vi)
+		Two populations \emph{merge}\marginnote{\tiny MERGE} together as follows: for each trait $t$ appearing in either population, if $t$ is combative in exactly one of the two populations, then $t$ is combative in the merged population; otherwise, $t$ is docile.
+		
 
+%		NATURAL SELECTION
+		
+		In adaptation, \emph{natural selection}\marginnote{\tiny NATURAL SELECTION} removes recursively all barren populations from a DN $\cal{D}$ with respect to another DN ${\cal{D}}^{'}$.
+		
+
+%		REPLICATION
+		
+		\emph{Replication}\marginnote{\tiny REPLICATION} of a population $p(C,D)$ gives $p(C,D)$, as well as any set of populations $p(C^{'}, D)$, where $C^{'} \subset C$.
+		
 
 \subsection{Adaptation}
 \label{subsec:adaptation}
@@ -124,22 +113,17 @@ The query $P(X|Y)$ posed to a BN ${\cal B}$ is represented by DN ${\cal D}^{\pri
 In DNs, how populations ``adapt'' to the deletion of other populations corresponds precisely with testing independencies in BNs.
 
 Let ${\cal{P}}_X$, ${\cal{P}}_Y$, and ${\cal{P}}_Z$ be pairwise disjoint subsets of populations in a DN $\cal D$ and let DN ${\cal{D}}^{'} = {p(C)}$, where $C = T_c({\cal{P}}_X {\cal{P}}_Y {\cal{P}}_Z)$. 
-The test \emph{m-adaptation} of ${\cal{P}}_X$ and ${\cal{P}}_Z$ given ${\cal{P}}_Y$, denoted $A({\cal{P}}_X,{\cal{P}}_Y,{\cal{P}}_Z)$, in $\cal D$ with four simple steps:
+The test \emph{adaptation}\marginnote{\tiny ADAPTATION} of ${\cal{P}}_X$ and ${\cal{P}}_Z$ given ${\cal{P}}_Y$, denoted $A({\cal{P}}_X,{\cal{P}}_Y,{\cal{P}}_Z)$, in $\cal D$ with four simple steps:
 (i) let natural selection act on $\cal{D}$ with respect to ${\cal{D}}^{'}$, giving ${\cal{D}}^{s}$;
 (ii) construct the docilization of ${\cal{D}}^{s}$, giving ${\cal{D}}^s_m$;
 (iii) delete $p(C,D)$ from ${\cal{D}}^s_m$, for each $p(C,D)$ in ${\cal{P}}_Y$; and,
 (iv) after recursively merging populations sharing a common trait, if there exists a population containing both a combative trait in $T_c({\cal{P}}_X)$ and a combative trait in $T_c({\cal{P}}_Z)$, then $A({\cal{P}}_X,{\cal{P}}_Y,{\cal{P}}_Z)$ fails; otherwise, $A({\cal{P}}_X,{\cal{P}}_Y,{\cal{P}}_Z)$ succeeds.
 
 
-[example adaptation]
-
-
 \subsection{Evolution}
 \label{subsec:evolution}
 
 
-%
-The \emph{evolution} of a DN $\cal{D}$ into a DN ${\cal{D}}^{'}$ occurs by natural selection removing recursively all barren, independent, and spent populations, merging existing populations, and replicating to form new populations.
+The \emph{evolution}\marginnote{\tiny EVOLUTION} of a DN $\cal{D}$ into a DN ${\cal{D}}^{'}$ occurs by natural selection removing recursively all barren, independent, and spent populations, merging existing populations, and replicating to form new populations.
 
-[example evolution]
 
