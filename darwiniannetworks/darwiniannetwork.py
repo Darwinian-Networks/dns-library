@@ -1,7 +1,4 @@
-from darwiniannetworks.population import Population
-
-
-class DarwinianNetwork(Population):
+class DarwinianNetwork():
 
     def __init__(self):
         self.populations = set()
