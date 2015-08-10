@@ -13,9 +13,16 @@ For disjoint $X,Y \subseteq U$, a \emph{conditional probability table} (CPT) $P(
 
 A \emph{Bayesian network}\marginnote{\tiny BAYESIAN NETWORK} (BN) \cite{pear88} is a \emph{directed acyclic graph} (DAG) $\cal{B}$ on $U$ together with CPTs $P(v_1 | Pa(v_1))$, $P(v_2|Pa(v_2)),$$\ldots,$ $P(v_n|Pa(v_n))$, where the \emph{parents} $Pa(v_i)$ of $v_i$ are those $v_j$ such that $(v_j,v_i) \in \cal{B}$.
 We call $\cal{B}$ a BN, if no confusion arises.
+Figure \ref{fig:dag} shows a BN with CPTs $P(fo)$, $P(bp)$,$P(lo|fo)$, $P(do|bp,fo)$, and $P(hb|do)$ are shown.
 The \emph{d-separation method}\marginnote{\tiny D-SEPARATION} \cite{pear88} can be used to read independencies from a DAG.
 
-%todo image BN
+\begin{figure}[hbt]
+    \begin{center}
+        \includegraphics[width=\textwidth]{img/DAG_darwiche}
+    \end{center}
+    \caption{A DAG ${\cal B}$ and CPTs from \cite{darwiche09}.}
+    \label{fig:dag}
+\end{figure}
 
 One method to perform inference on a DAG is called \emph{Variable elimination}\marginnote{\tiny VARIABLE ELIMINATION} (VE) \cite{zhan94}, which computes $P(X|Y=y)$ from a BN $\cal{B}$ as follows:
 (i) all barren variables are removed recursively, where $v$ is \emph{barren} \cite{zhan94}, if $Ch(v) = \emptyset$ and $v \not\in XY$;
@@ -35,16 +42,22 @@ The maximal cliques are organized as join tree $\cal T$.
 Finally, the CPTs of the BN are assigned to nodes of $\cal T$. 
 
 
-\clearpage
+%\clearpage
 
 \section{Darwinian Networks}
 \label{sec:darwinian_networks}
 
 \emph{Darwinian networks} (DNs)\marginnote{\tiny DARWINIAN NETWORKS} \cite{butzOliveiraSantosCai15} were proposed to simplify working with \emph{Bayesian networks} (BNs) \cite{pear88}.
-Rather than modelling the variables in a problem domain, DNs represent the probability tables in the model.
+Rather than modeling the variables in a problem domain, DNs represent the probability tables in the model.
 The graphical manipulation of the tables then takes on a biological feel, where a CPT $P(X|Y)$ is viewed as the novel representation of a \emph{population} $p(C,D)$ using both \emph{combative} traits $C$ (coloured clear) and \emph{docile} traits $D$ (coloured dark).
 
-%todo example BN --> DN
+\begin{figure}[hbt]
+    \begin{center}
+        \includegraphics[width=\textwidth]{img/DN_darwiche}
+    \end{center}
+    \caption{A DN ${\cal D}$ representing DAG ${\cal B}$ of Figure \ref{fig:dag}.}
+    \label{fig:dn}
+\end{figure}
 
 Adaptation and evolution are used to represent the testing of independencies and inference, respectively.
 Thus, DNs can represent exact inference VE, as well the test of independencies d-separation.
