@@ -1,36 +1,38 @@
 \chapter{Conclusion}
 \label{sec:conclusion}
 
-We propose Darwinian Network Library as new framework for modeling and inference in DNs.
+We proposed Darwinian Network Library as new framework for modeling and inference in DNs.
 DN library is a implementation of the basic operations for adaptation and evolution in DNs.
 It is implemented with the Python programming language and the basic data structures are provided by Darwin library.
-It provides salient features as test unity and a tutorials with IPython Notebook.
+%It provides salient features as test unity and a tutorials with IPython Notebook.
 The main advantage of the DN library is to apply novel ideas and techniques of DNs.
-DN library also is great for teaching as well for quick prototyping or testing.
+DN library also is great for teaching, quick prototyping with DNs and testing.
 
 
-DN library is based upon the novel library Darwin, a written in Python for BN modeling and inference.
+DN library is based upon the novel library Darwin, a Python framework for BN modeling and inference.
 Darwin library has two main categories called potentials and graph manipulations.
 The former is a data structure for modeling a probability table.
 The latter maps nodes in the graph to a list of potentials.
-
+Together they form a reliable structure to reason on BNs.
 
 We have established in Chapter \ref{sec:dn_lib} features of DN library given the manipulation tools from Darwin.
 We have shown that DN library is an intuitive framework for working with DNs.
-For instance, to a set of potentials, that is, a DN, one can utilize the class \emph{Population} that together form the other class \emph{DarwinianNetwork}.
+For instance, to build a set of potentials, one can simply utilize the class \emph{Population}.
+Intuitively, with objects \emph{Population} together we can obtain a class \emph{DarwinianNetwork}.
+
 Another salient feature is the set of procedures for drawing Populations and DarwinianNetworks.
-It allows the user to see how looks like a population that has just been created - or even the whole DN!
+It allows the user to see how looks like a population that has just been created - or even the entire DN!
 
 
 This project proposes the implementation of a DN library.
-In summary, we have stablished three main advantages of using DN library:
+In summary, we have stablished four main advantages of using DN library:
 \begin{inparaenum}[(i)]
 \item due its simple approach given the Python implementation, it has an expressive language that facilitate its usage;
-\item it has interactive visual tools to compute and draw DNs which enables users a interesting interactivity with the library;
-\item it is a great tool for learning and its operations is sound as assure by unit tests;
-\item and all source code is available online on \emph{GitHub} through the webpage:
+\item it has interactive visual tools to compute and draw DNs, enabling users to better interact with the library;
+\item it is a great tool for learning and its operations are sound given the unit tests;
+\item and all source code is available free online on \emph{GitHub} through the webpage:
 \end{inparaenum}
 \begin{center}
 \url{https://github.com/Darwinian-Networks}
 \end{center}
-Finally, with DN library, DNs can be applyied as a simple and yet remarkably robust tool to simplify reasoning with BNs.
+With DN library, DNs can be applied as the simple and yet remarkably robust tool they are, allowing users to simplify reasoning with BNs.

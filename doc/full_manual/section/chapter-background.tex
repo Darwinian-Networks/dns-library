@@ -10,33 +10,37 @@
 Let $U = \{ v_1, v_2, \ldots , v_n \}$ be a finite set of variables, each with a finite domain.
 A singleton set $\{v\}$ may be written as $v$, $\{ v_1, v_2, \ldots, v_n \}$ as $v_1 v_2 \cdots v_n$, and $X \cup Y$ as $XY$.
 For disjoint $X,Y \subseteq U$, a \emph{conditional probability table} (CPT) $P(X|Y)$ is a potential over $XY$ that sums to one for each value $y$ of $Y$.
+The \emph{children} $Ch(v_i)$ and \emph{parents} $Pa(v_i)$ of $v_i$ are those $v_j$ such that $(v_i,v_j) \in \cal{B}$ and $(v_j,v_i) \in \cal{B}$, respectively.
 
 A \emph{Bayesian network}\marginnote{\tiny BAYESIAN NETWORK} (BN) \cite{pear88} is a \emph{directed acyclic graph} (DAG) $\cal{B}$ on $U$ together with CPTs $P(v_1 | Pa(v_1))$, $P(v_2|Pa(v_2)),$$\ldots,$ $P(v_n|Pa(v_n))$, where the \emph{parents} $Pa(v_i)$ of $v_i$ are those $v_j$ such that $(v_j,v_i) \in \cal{B}$.
 We call $\cal{B}$ a BN, if no confusion arises.
-Figure \ref{fig:dag} shows a BN with CPTs $P(fo)$, $P(bp)$,$P(lo|fo)$, $P(do|bp,fo)$, and $P(hb|do)$ are shown.
-The \emph{d-separation method}\marginnote{\tiny D-SEPARATION} \cite{pear88} can be used to read independencies from a DAG.
+Figure \ref{fig:dag} shows a BN with CPTs $P(fo)$, $P(bp)$, $P(lo|fo)$, $P(do|bp,fo)$, and $P(hb|do)$ shown.
 
 \begin{figure}[hbt]
     \begin{center}
         \includegraphics[width=\textwidth]{img/DAG_darwiche}
     \end{center}
-    \caption{A DAG ${\cal B}$ and CPTs from \cite{darwiche09}.}
+    \caption{A DAG ${\cal B}$ and its CPTs from \cite{darwiche09}.}
     \label{fig:dag}
 \end{figure}
+
+The \emph{conditional independence} \cite{pear88} of $X$ and $Z$ given $Y$ holding in $P(U)$ is denoted $I(X,Y,Z)$.
+The \emph{d-separation method}\marginnote{\tiny D-SEPARATION} \cite{pear88} can be used to read independencies from a DAG.
+It is known that if $I_{\cal{B}}(X,Y,Z)$ holds by d-separation in ${\cal B}$, then $I(X,Y,Z)$ holds in $P(U)$.
 
 One method to perform inference on a DAG is called \emph{Variable elimination}\marginnote{\tiny VARIABLE ELIMINATION} (VE) \cite{zhan94}, which computes $P(X|Y=y)$ from a BN $\cal{B}$ as follows:
 (i) all barren variables are removed recursively, where $v$ is \emph{barren} \cite{zhan94}, if $Ch(v) = \emptyset$ and $v \not\in XY$;
 (ii) all independent by evidence variables are removed, giving ${\cal{B}}^s$, where $v$ is an \emph{independent by evidence} variable, if $I(v,Y,X)$ holds in $\cal{B}$ by m-separation;
 (iii) build a uniform distribution $1(v)$ for any root of ${\cal{B}}^s$ that is not a root of $\cal{B}$;
 (iv) set $Y$ to $Y=y$ in the CPTs of ${\cal{B}}^s$;
-(v) determine an elimination ordering $\sigma$ from the moral graph ${\cal{B}}^{s}_{m}$;
+(v) determine an elimination ordering $\sigma$ from the moral graph ${\cal{B}}^{s}_{m}$ (as explained later);
 (vi) following $\sigma$, eliminate variable $v$ by multiplying together all potentials involving $v$, and then summing $v$ out of the product;
 and, (vii) multiply together all remaining potentials and normalize to obtain $P(X|Y=y)$.
 
 
 To perform probabilistic inference, a BN is commonly transformed into a \emph{Markov network} \marginnote{\tiny MARKOV NETWORK}(MN) \cite{pear88}, also called a \emph{decomposable} MN. 
 A MN consists of a triangulated (chordal) graph together with a potential defined over each maximal clique of triangulated graph. 
-Given a DAG ${\cal D}$, the \emph{moralization} \cite{laur88} of ${\cal D}$ is the undirected graph constructed by adding an undirected edge between each pair of parents of a common child and then dropping directionality.
+Given a DAG, the \emph{moralization} \cite{laur88} of the DAG is the undirected graph constructed by adding an undirected edge between each pair of parents of a common child and then dropping directionality.
 When necessary, edges are added to the moralized graph to obtain a triangulated graph. 
 The maximal cliques are organized as join tree $\cal T$. 
 Finally, the CPTs of the BN are assigned to nodes of $\cal T$. 
@@ -119,7 +123,7 @@ The query $P(X|Y)$ posed to a BN ${\cal B}$ is represented by DN ${\cal D}^{\pri
 		\emph{Replication}\marginnote{\tiny REPLICATION} of a population $p(C,D)$ gives $p(C,D)$, as well as any set of populations $p(C^{'}, D)$, where $C^{'} \subset C$.
 		
 
-\subsection{Adaptation}
+\subsection{Modeling}
 \label{subsec:adaptation}
 
 
@@ -133,7 +137,7 @@ The test \emph{adaptation}\marginnote{\tiny ADAPTATION} of ${\cal{P}}_X$ and ${\
 (iv) after recursively merging populations sharing a common trait, if there exists a population containing both a combative trait in $T_c({\cal{P}}_X)$ and a combative trait in $T_c({\cal{P}}_Z)$, then $A({\cal{P}}_X,{\cal{P}}_Y,{\cal{P}}_Z)$ fails; otherwise, $A({\cal{P}}_X,{\cal{P}}_Y,{\cal{P}}_Z)$ succeeds.
 
 
-\subsection{Evolution}
+\subsection{Inference}
 \label{subsec:evolution}
 
 
