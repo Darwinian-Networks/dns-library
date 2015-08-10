@@ -2,11 +2,11 @@
 \label{sec:darwin_lib}
 
 Darwin is a simple library written in Python for BN modeling and inference.
-The main purpose of the library is teaching and quick prototyping or testing.
+The main purpose of the library is teaching BNs and quick prototyping or testing small networks.
 In order to achieve these goals, the library has a simplistic approach of implementation, using native Python data structure and light usage of object oriented programming.
 The structure of Darwin is basically divided into two categories: potentials and graph manipulations.
-The features are also split into two main categories: tools for inference and modeling.
-Furthermore, in this section we also present a guide for getting started using Darwin.
+The features are also split into two main categories: inference and modeling tools.
+Later, in this section, we also present a guide for getting started using Darwin.
 
 \section{Structure}
 \label{sec:system:sec1}
@@ -26,22 +26,22 @@ At the root, the class \emph{Potential} is a data structure for modeling a proba
 The \emph{NetworkX} \cite{hagberg-2008-exploring} is set of data structures for graph manipulation and is also included at the root of the library.
 Similarly, \emph{GraphWithPotential} is a class which basically maps nodes in a graph with a set of potentials, besides providing manipulations on the graph and the potentials on it.
 \emph{BayesianNetwork} is a class that inherits from \emph{GraphWithPotential} but maps only one potential per node.
-This data structure is used for a BN modeling.
+This data structure is used for modeling a BN.
 In the same way, the class \emph{MarkovNetwork} entirely inherits the behaviour and properties of \emph{GraphWithPotential}, therefore it can be used for MN modeling.
 
 The \emph{Utils} branch is formed by a set of standalone functions which implement core procedures for the other classes.
-Mainly, these functions are defined by numerical operations and can be optimized separately.
-One advantage of having those implementations as standalone functions is that future optimized code can be included or modified without disturbing the other classes.
+Mainly, these functions are defined by numerical operations on lists of probabilities.
+One advantage of having those implementations as standalone functions is that future optimized code can be included or modified without disturbing the other classes, since the other classes only makes a function call to those utilities functions.
 Basically, there are three main utilities: \emph{BnUtils}, \emph{MnUtils}, and \emph{PotentialUtils}.
 The BnUtils has a set of functions for BN manipulations and operations, such as moralization, triangulization, join tree construction, among others.
-In MnUtils, we have utilities for MN propagation such as finding a optimal path for propagating in a tree.
+In MnUtils, we have utilities for MN propagation such as finding an optimal path for propagating in a tree.
 Lastly, PotentialUtils is formed by a set of procedures for numerical operations such as multiplication, division and marginalization of tables.
 All potential manipulations in PotentialUtils is implemented according to the efficient implementation proposed in \cite{koll09}.
 
 In the \emph{Modeling} brach, there is an implementation of d-Separation as proposed in Algorithm 3.1 of \cite{koll09}.
 While in the branch \emph{Inference} there are few data structures useful for exact inference in BNs.
 The \emph{Barren} function is used for identifying barren potentials in factorizations.
-\emph{SumOut} is a function which systematically remove a set of variables from a factorization.
+\emph{SumOut} is a function which systematically removes a set of variables from a factorization by multiplying potentials with the variables and them marginalizing the variables out.
 The class \emph{VariableElimination} implements the exact inference algorithm VE as originally proposed by \cite{zhan94}.
 Finally, the \emph{Test} branch has a set of unit tests which assure the correct functioning of core functions in the whole library.
 
@@ -56,10 +56,10 @@ The graph manipulations are done by an external library called \emph{NetworkX}, 
 
 For modeling, Darwin has the testing of d-Separation implemented using a reachability algorithm.
 Also, the library has built in tools for converting a BN into a MN, including the join tree construction by moralization, triangulization and the assignment of potentials.
-The triangulization step, specifically, has implemented 4 different heuristics, the same as implemented in \emph{PgmPy}.
+The triangulization step, specifically, has implemented 4 different heuristics, the same as implemented in \emph{PgmPy} \footnote{http://pgmpy.org}.
 
 For inference, the library provides a basic function for eliminating variables in a factorization, called \emph{SumOut}.
-But for faster inference, it is recommended to use the VE implementation which absorb evidence, removes barren and independent by evidence potentials, perform inference and, finally, normalize the final result.
+But for faster inference, it is recommended to use the VE implementation which absorb evidence, removes barren and independent by evidence potentials, perform inference by summing out non relevant variables and, finally, normalize the final result.
 
 \section{Usage}
 \label{sec:system:sec3}
