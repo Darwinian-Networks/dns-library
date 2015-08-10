@@ -24,7 +24,7 @@ These two categories form individually or together the tree structure of the lib
 
 
 At the root, the class \emph{Potential} is a data structure for modelling a probability table.
-The \emph{NetworkX} is set of data structures for graph manipulation and is also included at the root of the library.
+The \emph{NetworkX} \cite{hagberg-2008-exploring} is set of data structures for graph manipulation and is also included at the root of the library.
 Similarly, \emph{GraphWithPotential} is a class which basically maps nodes in a graph with a set of potentials, besides providing manipulations on the graph and the potentials on it.
 \emph{BayesianNetwork} is a class that inherits from \emph{GraphWithPotential} but maps only one potential per node.
 This data structure is used for a BN modelling.
@@ -52,7 +52,7 @@ Finally, the \emph{Test} branch has a set of unit tests which assure the correct
 Here, we highlight some feature of the library.
 In general, the features are tools to facilitate the use of Darwin in teaching and prototyping of small system.
 The library is not intended for fast inference, neither high accuracy.
-Therefore, all numerical operations are implemented using native Python code, instead of high performance libraries such as \emph{numpy}.
+Therefore, all numerical operations are implemented using native Python code, instead of high performance libraries such as \emph{numpy} \cite{van2011numpy}.
 The graph manipulations are done by an external library called \emph{NetworkX}, a robust and well known library with high performance and large set of tools.
 
 For modelling, Darwin has the testing of d-Separation implemented using a reachability algorithm.

@@ -37,7 +37,7 @@ That is, if the user does not pass all the required arguments, the DN library in
 For example, in the above code the cardinalities of variables ``a'' and ``b'' are set to 2 and the 4 probabilities values are randomly generated between 0 and 1.
 
 Finally, the DN library has a set of procedures for drawing Populations and DarwinianNetworks whenever the user calls them.
-Those tools are built using the \emph{matplotlib} library for Python and is the only requirement for the drawings.
+Those tools are built using the \emph{matplotlib} \cite{Hunter:2007} library for Python and is the only requirement for the drawings.
 If the user wants to see how a population looks like, the user can define the Population and then calls the \emph{draw\_population} function as illustrate below:
 \begin{verbatim}
     p = Population(combative=["a"],docile=["b"])
